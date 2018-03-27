@@ -2,11 +2,17 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 
-import { Button } from 'element-ui';
+import { Button, Card, Input, Message } from 'element-ui';
 
 Vue.config.productionTip = true;
 
-Vue.component(Button.name, Button);
+import { setupAxiosAuth } from '@/helper/axios';
+
+Vue.use(Button);
+Vue.use(Card);
+Vue.use(Input);
+
+setupAxiosAuth();
 
 new Vue({
   router,
