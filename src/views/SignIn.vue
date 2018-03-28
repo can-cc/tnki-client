@@ -1,7 +1,7 @@
 <template>
   <div class="signin-page">
     <h1>Tnki</h1>
-    <h2>       - Sign In</h2>
+    <h2>- Sign In</h2>
     <form v-on:submit="signIn($event)">
       <div class="form-item">
         <label>
@@ -31,8 +31,9 @@
 
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
-import axios from 'axios';
 import { Message } from 'element-ui';
+import { setJwt } from '@/helper/auth';
+import axios from 'axios';
 import router from '@/router';
 
 @Component({
@@ -52,7 +53,7 @@ export default class SignIn extends Vue {
 
       setJwt(response.headers.jwt);
       Message.success('Sign in sccuess');
-      router.push('/home');
+      router.push('/dash');
     } catch (error) {
       if (error.response && error.response.status === 401) {
         return Message.error('Email or Password not match');

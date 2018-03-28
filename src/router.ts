@@ -14,12 +14,12 @@ export default new Router({
   routes: [
     {
       path: '/signin',
-      name: 'SignIn',
+      name: 'signin',
       component: SignIn
     },
     {
       path: '/signup',
-      name: 'SignUp',
+      name: 'signup',
       component: SignUp
     },
     {
@@ -28,14 +28,18 @@ export default new Router({
       component: Home
     },
     {
-      path: '/',
-      name: 'Dash',
+      path: '/dash',
+      name: 'dash',
       component: Dash
     },
     {
       path: '/about',
-      name: 'About',
+      name: 'about',
       component: About
+    },
+    {
+      path: '*',
+      redirect: { name: 'dash' }
     }
   ]
 });
