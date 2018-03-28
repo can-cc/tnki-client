@@ -62,7 +62,7 @@ export default class SignUp extends Vue {
   public password: string = '';
   public passwordVerification: string = '';
 
-  public async signUp(event) {
+  public async signUp(event: Event) {
     try {
       event.preventDefault();
       if (this.password !== this.passwordVerification) {

@@ -7,7 +7,7 @@
           <i class="el-icon-search"/>
           learn
         </router-link>
-        <router-link class="post-link" to="/post">
+        <router-link class="post-link" to="/create">
           <i class="el-icon-edit-outline"/>
           create
         </router-link>

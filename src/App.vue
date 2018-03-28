@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Nav/>
-    <router-view/>
+    <div class="view-container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -18,37 +20,37 @@ export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
-html, body {
-  margin: 0;
-}
+html, body
+  margin: 0
 
-hr {
-  background-color: #444;
-  border-width: 0;
-  color: #444;
-  height: 2px;
-  line-height: 0;
-  page-break-after: always;
-  width: 80%;
-}
+hr
+  background-color: #444
+  border-width: 0
+  color: #444
+  height: 2px
+  line-height: 0
+  page-break-after: always
+  width: 80%
 
-a {
-  text-decoration: none;
-  color: #4688f1;
-}
+a
+  text-decoration: none
+  color: #4688f1
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
+#app
+  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  color: #2c3e50
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-align: center
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .3s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-  opacity: 0;
-}
+.fade-enter-active, .fade-leave-active
+  transition: opacity .3s
+
+.fade-enter, .fade-leave-to
+  opacity: 0
+
+.view-container
+  max-width: 700px
+  margin: 0 auto
+
 </style>
