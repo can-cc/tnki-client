@@ -7,12 +7,12 @@
         <i class="el-icon-date"></i>
       </div>
       <div class="statistics">
-        <div v-bind:key="item.name" 
+        <div v-bind:key="item.name"
              v-for="item in [
-               {name: 'Learned', key: 'learn_time'}, 
-               {name: 'Need learn', key: 'need_learn_count'}, 
+               {name: 'Learned', key: 'learn_time'},
+               {name: 'Need learn', key: 'need_learn_count'},
                {name: 'All Finish', key: 'all_finish'}
-             ]" 
+             ]"
              class="statistics-grid">
           <div class="value">{{statistics ? statistics[item.key] : '-'}}</div>
           <div class="name">{{item.name}}</div>
@@ -70,7 +70,6 @@ export default class Dash extends Vue {
 
 <style scoped lang="stylus">
 .dash-page
-  max-width: 700px
   margin: 0 auto
 
 .el-card {

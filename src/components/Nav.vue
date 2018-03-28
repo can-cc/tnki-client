@@ -34,16 +34,15 @@ nav
 
 .container
   z-index: 99
+  height: 100%
   width: 700px
   margin: 0 auto
   display: flex
   justify-content: flex-start
   align-items: center
   position: relative
-  padding: 5px 0px 5px
 
 .container > div
-  line-height: 30px
   position: relative
   text-align: center
   overflow: hidden
@@ -61,9 +60,6 @@ a
   width: 80px
   display: inline-block
   font-size: 18px
-  vertical-align: bottom
-
-.top-bar-link
-  font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif
+  margin-top: 3px
 
 </style>

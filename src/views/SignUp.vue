@@ -72,13 +72,13 @@ export default class SignUp extends Vue {
         email: this.email,
         password: this.password
       });
-      this.$message({
+      Message({
         message: 'Sign up sccuess! Please sign in',
         type: 'success'
       });
       router.push('/signin');
     } catch (error) {
-      this.$message.error('Sign up unknown error.');
+      Message.error('Sign up unknown error.');
     }
   }
 }
