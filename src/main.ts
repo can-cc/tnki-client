@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 
-import { Button, Card, Input, Message } from 'element-ui';
+import { Button, Card, Input, Message, Table } from 'element-ui';
 
 Vue.config.productionTip = true;
 
