@@ -11,6 +11,9 @@
           <i class="el-icon-edit-outline"/>
           create
         </router-link>
+        <router-link class="post-link" to="/cards">
+          Cards
+        </router-link>
       </div>
 	  </div>
   </nav>
