@@ -27,7 +27,7 @@
     </div>
 
     <div class="post-link-container">
-      <router-link to="/post">
+      <router-link to="/create">
         <i class="el-icon-d-arrow-right"></i>
         add new card
       </router-link>

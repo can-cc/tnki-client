@@ -32,7 +32,7 @@
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
 import { Message } from 'element-ui';
-import { setJwt } from '@/helper/auth';
+import { setJwt, setUserId } from '@/helper/auth';
 import axios from 'axios';
 import router from '@/router';
 
@@ -52,6 +52,7 @@ export default class SignIn extends Vue {
       });
 
       setJwt(response.headers.jwt);
+      setUserId(response.headers['user-id']);
       Message.success('Sign in sccuess');
       router.push('/dash');
     } catch (error) {

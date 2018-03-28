@@ -34,6 +34,7 @@ import { Component, Vue, Model } from 'vue-property-decorator';
 import { Message } from 'element-ui';
 import axios from 'axios';
 import router from '@/router';
+import { readUserId } from '@/helper/auth';
 
 @Component({
   components: {}
@@ -43,7 +44,8 @@ export default class Learn extends Vue {
   learningOpen = false;
 
   created(): void {
-    axios.get('/api/cards').then(response => {
+    const userId = readUserId();
+    axios.get(`/api/cards/user/${userId}/learn/today`).then(response => {
       this.cards = response.data;
       if (!this.cards.length) {
         return router.push('/learn-complete');
