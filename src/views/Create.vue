@@ -1,10 +1,8 @@
 <template>
   <div class="post-page">
-
-    <h1>
-      <i class="el-icon-edit"></i>
-      Add Card:
-    </h1>
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item :to="{ path: '/home' }">Home</el-breadcrumb-item>
+    </el-breadcrumb>
 
     <form v-on:submit="post($event)">
       <div class="post-input">
@@ -12,42 +10,55 @@
 
         </div>
 
-        <el-card :body-style="{padding: '0'}">
-          <h2>
-            Front:
-            <small>(markdown)</small>
-          </h2>
-          <div class="input-area">
-            <el-input
-              type="textarea"
-              :rows="5"
-              placeholder="Please input card front"
-              v-model="front">
-            </el-input>
-          </div>
-        </el-card>
+        <el-container>
+          <el-main>
 
-        <el-card :body-style="{padding: '0'}">
-          <h2>
-            Back:
-            <small>(markdown)</small>
-          </h2>
-          <div class="input-area">
-            <el-input
-              type="textarea"
-              :rows="5"
-              placeholder="please input card backend"
-              v-model="backend">
-            </el-input>
-          </div>
-        </el-card>
+            <h2>
+              Front:
+              <small>(markdown)</small>
+            </h2>
+            <div class="input-area">
+              <el-input
+                type="textarea"
+                :rows="5"
+                placeholder="Please input card front"
+                v-model="front">
+              </el-input>
+            </div>
+            <el-upload
+              action="/api/image"
+              name="image"
+              :limit="1"
+              list-type="picture-card">
+              <i class="el-icon-plus"></i>
+            </el-upload>
+            <h2>
+              Back:
+              <small>(markdown)</small>
+            </h2>
+            <div class="input-area">
+              <el-input
+                type="textarea"
+                :rows="5"
+                placeholder="please input card backend"
+                v-model="backend">
+              </el-input>
+            </div>
+            <el-upload
+              action="/api/image"
+              name="image"
+              :limit="1"
+              list-type="picture-card">
+              <i class="el-icon-plus"></i>
+            </el-upload>
+            <div class="button-container">
+              <el-button native-type="submit" type="primary" plain>Add Card</el-button>
+            </div>
+          </el-main>
+        </el-container>
 
       </div>
 
-
-      <div class="button-container">
-        <el-button native-type="submit" type="primary" plain>Add Card</el-button>
-      </div>
 
     </form>
   </div>
@@ -56,13 +67,14 @@
 
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
+import { Upload } from 'element-ui';
 import { Message } from 'element-ui';
 import { setJwt } from '@/helper/auth';
 import axios from 'axios';
 import router from '@/router';
 
 @Component({
-  components: {}
+  components: { 'el-upload': Upload }
 })
 export default class Create extends Vue {
   public front: string = '';
@@ -72,10 +84,11 @@ export default class Create extends Vue {
     this.front = '';
     this.backend = '';
   }
-  async post(event: Event): void {
+  async post(event: Event): Promise<void> {
     event.preventDefault();
     if (!this.front.trim() || !this.backend.trim()) {
-      return Message.warning('Please fill card front and back.');
+      Message.warning('Please fill card front and back.');
+      return;
     }
     try {
       event.preventDefault();

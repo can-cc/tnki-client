@@ -12,6 +12,7 @@
           create
         </router-link>
         <router-link class="post-link" to="/cards">
+          <i class="el-icon-tickets"></i>
           Cards
         </router-link>
       </div>
@@ -23,9 +24,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Nav extends Vue {
-  @Prop() private msg!: string;
-}
+export default class Nav extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -60,7 +59,7 @@ nav
 
 a
   color: white
-  width: 80px
+  width: 100px
   display: inline-block
   font-size: 18px
   margin-top: 3px

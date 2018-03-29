@@ -7,11 +7,11 @@
       </div>
 
       <span class="text-container-label">front:</span>
-      <div class="card-text-container" v-html="cards[0].front_text"></div>
+      <div class="card-text-container" v-html="cards[0].frontText"></div>
 
       <div v-if="learningOpen">
         <span class="text-container-label">back:</span>
-        <div class="card-text-container" v-html="cards[0].back_text"></div>
+        <div class="card-text-container" v-html="cards[0].backText"></div>
       </div>
 
       <div class="operation" v-if="!learningOpen">
@@ -52,13 +52,14 @@ export default class Learn extends Vue {
       }
     });
   }
-  async open(memoryLevel): void {
+  async open(memoryLevel: any): Promise<void> {
     await axios.post(`/api/cards/${this.cards[0].id}/memory`, {
       memoryLevel: memoryLevel
     });
     this.cards = this.cards.slice(1);
     if (!this.cards.length) {
-      return router.push('/learn-complete');
+      router.push('/learn-complete');
+      return;
     }
     this.learningOpen = false;
   }
