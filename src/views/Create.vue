@@ -1,90 +1,84 @@
 <template>
   <div class="post-page">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/home' }">Home</el-breadcrumb-item>
-    </el-breadcrumb>
+    <el-form :model="form" label-width="80px">
+      <el-form-item label="Front:">
+        <el-input
+          type="textarea"
+          :rows="5"
+          placeholder="Please input card front"
+          v-model="front">
+        </el-input>
 
-    <form v-on:submit="post($event)">
-      <div class="post-input">
-        <div>
+        <img v-bind:src="form.frontImage"/>
+        {{form.frontImage}}
+      </el-form-item>
 
-        </div>
+      <el-form-item>
 
-        <el-container>
-          <el-main>
-
-            <h2>
-              Front:
-              <small>(markdown)</small>
-            </h2>
-            <div class="input-area">
-              <el-input
-                type="textarea"
-                :rows="5"
-                placeholder="Please input card front"
-                v-model="front">
-              </el-input>
-            </div>
-            <el-upload
-              action="/api/image"
-              name="image"
-              :limit="1"
-              list-type="picture-card">
-              <i class="el-icon-plus"></i>
-            </el-upload>
-            <h2>
-              Back:
-              <small>(markdown)</small>
-            </h2>
-            <div class="input-area">
-              <el-input
-                type="textarea"
-                :rows="5"
-                placeholder="please input card backend"
-                v-model="backend">
-              </el-input>
-            </div>
-            <el-upload
-              action="/api/image"
-              name="image"
-              :limit="1"
-              list-type="picture-card">
-              <i class="el-icon-plus"></i>
-            </el-upload>
-            <div class="button-container">
-              <el-button native-type="submit" type="primary" plain>Add Card</el-button>
-            </div>
-          </el-main>
-        </el-container>
-
-      </div>
+      <el-upload
+        action="/api/image"
+        name="image"
+        :limit="1"
+        :on-success="handleImageUploadSuccess('frontImage')"
+        list-type="picture-card">
+        <i class="el-icon-plus"></i>
+      </el-upload>
+      </el-form-item>
 
 
-    </form>
+      <el-form-item label="Back:">
+        <el-input
+          type="textarea"
+          :rows="5"
+          placeholder="please input card backend"
+          v-model="backend">
+        </el-input>
+        <el-upload
+          action="/api/image"
+          name="image"
+          :limit="1"
+          list-type="picture-card">
+          <i class="el-icon-plus"></i>
+        </el-upload>
+      </el-form-item>
+
+      <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
+    </el-form>
   </div>
 
 </template>
 
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
-import { Upload } from 'element-ui';
-import { Message } from 'element-ui';
+import { Upload, Message, Form, FormItem } from 'element-ui';
 import { setJwt } from '@/helper/auth';
 import axios from 'axios';
 import router from '@/router';
 
 @Component({
-  components: { 'el-upload': Upload }
+  components: { 'el-upload': Upload, 'el-form': Form, 'el-form-item': FormItem }
 })
 export default class Create extends Vue {
   public front: string = '';
   public backend: string = '';
+  public form: {
+    frontText: string;
+    frontImage: string;
+    backText: stirng;
+    backImage: string;
+  } = { frontText: '', frontImage: '', backText: '' };
+
+  handleImageUploadSuccess = (field: string): Function => {
+    return (res, file) => {
+      this.form[field] = '/image/' + res.file.path;
+    };
+  };
 
   reset(): void {
     this.front = '';
     this.backend = '';
   }
-  async post(event: Event): Promise<void> {
+  async create(event: Event): Promise<void> {
     event.preventDefault();
     if (!this.front.trim() || !this.backend.trim()) {
       Message.warning('Please fill card front and back.');
