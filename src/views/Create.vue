@@ -1,46 +1,53 @@
 <template>
   <div class="post-page">
-    <el-form :model="form" label-width="80px">
+    <el-form :model="form">
+      <h4>
+        Create a tnki card:
+      </h4>
       <el-form-item label="Front:">
         <el-input
           type="textarea"
-          :rows="5"
+          :rows="4"
           placeholder="Please input card front"
-          v-model="front">
+          v-model="form.frontText">
         </el-input>
 
-        <img v-bind:src="form.frontImage"/>
-        {{form.frontImage}}
       </el-form-item>
 
-      <el-form-item>
-
-      <el-upload
-        action="/api/image"
-        name="image"
-        :limit="1"
-        :on-success="handleImageUploadSuccess('frontImage')"
-        list-type="picture-card">
-        <i class="el-icon-plus"></i>
-      </el-upload>
-      </el-form-item>
-
-
-      <el-form-item label="Back:">
-        <el-input
-          type="textarea"
-          :rows="5"
-          placeholder="please input card backend"
-          v-model="backend">
-        </el-input>
+      <el-form-item label="Front image:">
         <el-upload
           action="/api/image"
           name="image"
           :limit="1"
-          list-type="picture-card">
-          <i class="el-icon-plus"></i>
+          :show-file-list="false"
+          :on-success="handleImageUploadSuccess('frontImage')">
+          <el-button size="small" type="primary">Click to upload</el-button>
         </el-upload>
       </el-form-item>
+
+      <img v-bind:src="form.frontImage"/>
+
+      <el-form-item label="Back:">
+        <el-input
+          type="textarea"
+          :rows="4"
+          placeholder="please input card backend"
+          v-model="form.backText">
+        </el-input>
+      </el-form-item>
+
+      <el-form-item label="Back image:">
+        <el-upload
+          action="/api/image"
+          name="image"
+          :limit="1"
+          :show-file-list="false"
+          :on-success="handleImageUploadSuccess('backImage')">
+          <el-button size="small" type="primary">Click to upload</el-button>
+        </el-upload>
+      </el-form-item>
+
+      <img v-bind:src="form.backImage"/>
 
       <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
     </el-form>
@@ -52,44 +59,38 @@
 import { Component, Vue, Model } from 'vue-property-decorator';
 import { Upload, Message, Form, FormItem } from 'element-ui';
 import { setJwt } from '@/helper/auth';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import router from '@/router';
 
 @Component({
   components: { 'el-upload': Upload, 'el-form': Form, 'el-form-item': FormItem }
 })
 export default class Create extends Vue {
-  public front: string = '';
-  public backend: string = '';
   public form: {
     frontText: string;
     frontImage: string;
-    backText: stirng;
+    backText: string;
     backImage: string;
-  } = { frontText: '', frontImage: '', backText: '' };
+  } = { frontText: '', frontImage: '', backText: '', backImage: '' };
 
-  handleImageUploadSuccess = (field: string): Function => {
-    return (res, file) => {
-      this.form[field] = '/image/' + res.file.path;
+  handleImageUploadSuccess = (field: 'frontImage' | 'backImage'): Function => {
+    return (res: { filename: string }) => {
+      this.form[field] = '/image/' + res.filename;
     };
   };
 
   reset(): void {
-    this.front = '';
-    this.backend = '';
+    this.form = { frontText: '', frontImage: '', backText: '', backImage: '' };
   }
   async create(event: Event): Promise<void> {
     event.preventDefault();
-    if (!this.front.trim() || !this.backend.trim()) {
+    if (!this.form.frontText.trim() || !this.form.backText.trim()) {
       Message.warning('Please fill card front and back.');
       return;
     }
     try {
       event.preventDefault();
-      await axios.post('/api/cards', {
-        front: this.front,
-        back: this.backend
-      });
+      await axios.post('/api/cards', this.form);
       Message.success('Add card successful!');
       this.reset();
     } catch (error) {
@@ -100,4 +101,17 @@ export default class Create extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.post-page
+  text-align: left
+  margin-bottom: 50px
+
+.el-form-item >>> .el-upload
+  overflow: hidden
+  display: block
+  text-align: left
+  width: 100%
+
+.el-form
+  img
+    max-width: 100%
 </style>
