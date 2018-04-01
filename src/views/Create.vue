@@ -18,7 +18,7 @@
         <el-upload
           action="/api/image"
           name="image"
-          :limit="1"
+          accept="image/*"
           :show-file-list="false"
           :on-success="handleImageUploadSuccess('frontImage')">
           <el-button size="small" type="primary">Click to upload</el-button>
@@ -40,7 +40,7 @@
         <el-upload
           action="/api/image"
           name="image"
-          :limit="1"
+          accept="image/*"
           :show-file-list="false"
           :on-success="handleImageUploadSuccess('backImage')">
           <el-button size="small" type="primary">Click to upload</el-button>
@@ -49,7 +49,9 @@
 
       <img v-bind:src="form.backImage"/>
 
-      <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
+      <div>
+        <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
+      </div>
     </el-form>
   </div>
 
