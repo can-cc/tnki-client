@@ -27,7 +27,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class Nav extends Vue {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 nav
   height: 40px
@@ -37,7 +36,7 @@ nav
 .container
   z-index: 99
   height: 100%
-  width: 700px
+  max-width: 700px
   margin: 0 auto
   display: flex
   justify-content: flex-start
