@@ -1,0 +1,15 @@
+server {
+  listen 80 default_server;
+  server_name tnki.octopuese.xyz;
+  charset utf-8;
+
+  root /www/public;
+  index index.html index.htm;
+
+  location / {
+    try_files $uri $uri/ /index.html =404;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}

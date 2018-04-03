@@ -1,0 +1,22 @@
+nginx:
+  restart: "no"
+  build: ./deploy/docker/nginx/
+  ports:
+    - "8080:80"
+  volumes:
+    - ./dist:/www/public
+
+api:
+  restart: "no"
+  build: ../tnki-api/
+  ports:
+    - "3010:3000"
+  volumes:
+   - ~/.m2:/root/.m2
+   - ../tnki-api:/src/tnki-api
+  command: >
+    bash -c "cd /src/tnki-api
+    && lein npm install
+    && lein trampoline run -m clojure.main scripts/build.clj
+    && ./tnki-server"
+  
