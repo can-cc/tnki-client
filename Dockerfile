@@ -6,5 +6,5 @@ RUN npm run build
 
 FROM tutum/nginx
 RUN rm /etc/nginx/sites-enabled/default
-ADD sites-enabled/ /etc/nginx/sites-enabled
+ADD deploy/nginx/sites-enabled/ /etc/nginx/sites-enabled
 COPY --from=builder /root/tnki-client/dist /www/public 
