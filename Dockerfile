@@ -4,6 +4,7 @@ WORKDIR /root/tnki-client
 RUN npm install
 RUN npm run build
 
-FROM nginx:1.13.11-alpine
-COPY deploy/nginx/sites-enabled/tnki /etc/nginx/nginx.conf
+FROM tutum/nginx
+RUN rm /etc/nginx/sites-enabled/default
+ADD sites-enabled/ /etc/nginx/sites-enabled
 COPY --from=builder /root/tnki-client/dist /www/public 
