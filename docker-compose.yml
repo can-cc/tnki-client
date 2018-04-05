@@ -2,16 +2,14 @@ version: "3.2"
 services:
   nginx:
     restart: "no"
-    build: ./deploy/docker/nginx/
+    build: .
     ports:
       - "8080:80"
       - "8081:443"
     volumes:
-      - ./dist:/www/public
       - /etc/letsencrypt:/etc/letsencrypt
     links:
       - api:api
-  
   api:
     restart: "no"
     build: ../tnki-api/
