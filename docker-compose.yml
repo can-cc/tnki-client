@@ -4,8 +4,8 @@ services:
     restart: "no"
     build: .
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
     links:
