@@ -26,11 +26,6 @@ export default new Router({
       name: 'signup',
       component: SignUp
     },
-    // {
-    //   path: '/home',
-    //   name: 'home',
-    //   component: Home
-    // },
     {
       path: '/create',
       name: 'create',
