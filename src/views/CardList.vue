@@ -8,11 +8,13 @@
           <el-table-column
             align="left"
             prop="frontText"
+            :show-overflow-tooltip="true"
             label="Front">
           </el-table-column>
           <el-table-column
             align="left"
             prop="backText"
+            :show-overflow-tooltip="true"
             label="Back">
           </el-table-column>
           <el-table-column
@@ -30,11 +32,13 @@
           <el-table-column
             align="left"
             prop="frontText"
+            :show-overflow-tooltip="true"
             label="Front">
           </el-table-column>
           <el-table-column
             align="left"
             prop="backText"
+            :show-overflow-tooltip="true"
             label="Back">
           </el-table-column>
           <el-table-column
@@ -104,7 +108,7 @@ h2 {
 }
 
 .el-card {
-  margin: 50px 20px;
+  margin: 50px 20px
 }
 
 .el-table >>> thead .cell
@@ -112,4 +116,12 @@ h2 {
 
 .el-tabs
   margin: 20px auto 50px
+
+</style>
+
+<style lang="stylus">
+.card-list-page .cell
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
 </style>

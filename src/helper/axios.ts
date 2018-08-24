@@ -12,7 +12,7 @@ export function setupAxiosAuth() {
       if (error.response.status === 401) {
         router.push('/signin');
       }
-      return error;
+      throw error;
     }
   );
 }

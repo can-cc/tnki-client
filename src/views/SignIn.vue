@@ -43,24 +43,28 @@ export default class SignIn extends Vue {
   public password: string = '';
   public email: string = '';
 
-  public async signIn(event: Event) {
+  public signIn(event: Event) {
     event.preventDefault();
-    try {
-      const response = await axios.post('/api/signin', {
+    axios
+      .post('/api/signin', {
         email: this.email,
         password: this.password
+      })
+      .then(response => {
+        console.log(response);
+        setJwt(response.headers.jwt);
+        setUserId(response.headers['user-id']);
+        Message.success('Sign in sccuess');
+        router.push('/dash');
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          return Message.error('Email or Password not match');
+        } else {
+          Message.error('Sign In Error');
+        }
       });
-
-      setJwt(response.headers.jwt);
-      setUserId(response.headers['user-id']);
-      Message.success('Sign in sccuess');
-      router.push('/dash');
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        return Message.error('Email or Password not match');
-      }
-      Message.error('Sign In Error');
-    }
   }
 }
 </script>

@@ -36,7 +36,7 @@ nav
 .container
   z-index: 99
   height: 100%
-  max-width: 700px
+  max-width: 1000px
   margin: 0 auto
   display: flex
   justify-content: flex-start
@@ -53,7 +53,7 @@ nav
   height: 22px
   border-radius: 50%
   opacity: 0.95
-  margin: 0 20px
+  margin: 0 10px
   border-radius: 50%
 
 a
