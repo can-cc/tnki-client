@@ -50,7 +50,7 @@ a
   opacity: 0
 
 .view-container
-  max-width: 700px
+  max-width: 1000px
   margin: 0 auto
 
 </style>
