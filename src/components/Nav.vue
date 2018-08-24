@@ -13,7 +13,7 @@
         </router-link>
         <router-link class="post-link" to="/cards">
           <i class="el-icon-tickets"></i>
-          Cards
+          cards
         </router-link>
       </div>
 	  </div>
