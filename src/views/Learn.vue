@@ -53,7 +53,7 @@ export default class Learn extends Vue {
     });
   }
   async open(memoryLevel: any): Promise<void> {
-    await axios.post(`/api/cards/${this.cards[0].id}/memory`, {
+    await axios.post(`/api/card/learn/${this.cards[0].id}/memory`, {
       memoryLevel: memoryLevel
     });
     this.cards = this.cards.slice(1);
