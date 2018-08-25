@@ -1,5 +1,5 @@
 upstream tnki_backend_upstream {
-    server api:3001;
+    server api:3000;
     keepalive 64;
 }
 
@@ -36,7 +36,7 @@ server {
         proxy_http_version 1.1;
         expires            off;
         add_header         'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-        proxy_pass         https://tnki_backend_upstream/api;
+        proxy_pass         http://tnki_backend_upstream/api;
     }
 
     location /image {
