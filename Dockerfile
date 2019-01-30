@@ -7,7 +7,7 @@ RUN npm run build
 FROM nginx:1.13.3-alpine
 
 ## Copy our default nginx config
-COPY deploy/nginx/nginx.config /etc/nginx/conf.d/default.conf
+COPY deploy/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 ## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html
