@@ -2,4 +2,4 @@
 
 ## development
 ### local setup
-`yarn serve`
+`yarn start`
