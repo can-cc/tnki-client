@@ -5,15 +5,20 @@
     <form v-on:submit="signIn($event)">
       <div class="form-item">
         <label>
-          <span>Email</span>
-          <el-input v-model="email" name="tnki-email" type="email" placeholder="Email"></el-input>
+          <span>Username</span>
+          <el-input v-model="username" name="tnki-email" type="text" placeholder="Email"></el-input>
         </label>
       </div>
 
       <div class="form-item">
         <label>
           <span>Password</span>
-          <el-input v-model="password" name="tnki-password" type="password" placeholder="Password"></el-input>
+          <el-input
+            v-model="password"
+            name="tnki-password"
+            type="password"
+            placeholder="Password"
+          ></el-input>
         </label>
       </div>
 
@@ -21,10 +26,7 @@
         <el-button native-type="submit" type="primary" plain>Sign In</el-button>
       </div>
 
-      <div class="tip">
-        Do not have account? <router-link to="/signup">Sign Up</router-link>
-      </div>
-
+      <div class="tip">Do not have account? <router-link to="/signup">Sign Up</router-link></div>
     </form>
   </div>
 </template>
@@ -41,24 +43,22 @@ import router from '@/router';
 })
 export default class SignIn extends Vue {
   public password: string = '';
-  public email: string = '';
+  public username: string = '';
 
   public signIn(event: Event) {
     event.preventDefault();
     axios
       .post('/api/signin', {
-        email: this.email,
+        username: this.username,
         password: this.password
       })
       .then(response => {
-        console.log(response);
-        setJwt(response.headers.jwt);
-        setUserId(response.headers['user-id']);
-        Message.success('Sign in sccuess');
-        router.push('/dash');
+        // setJwt(response.headers.jwt);
+        // setUserId(response.headers['user-id']);
+        // Message.success('Sign in sccuess');
+        // router.push('/dash');
       })
       .catch(error => {
-        console.log(error);
         if (error.response && error.response.status === 401) {
           return Message.error('Email or Password not match');
         } else {
@@ -112,5 +112,4 @@ form {
 .button-container {
   margin-top: 10px;
 }
-
 </style>
