@@ -9,9 +9,9 @@
           type="textarea"
           :rows="4"
           placeholder="Please input card front"
-          v-model="form.frontText">
+          v-model="form.front"
+        >
         </el-input>
-
       </el-form-item>
 
       <el-form-item label="Front image:">
@@ -20,19 +20,21 @@
           name="image"
           accept="image/*"
           :show-file-list="false"
-          :on-success="handleImageUploadSuccess('frontImage')">
+          :on-success="handleImageUploadSuccess('frontImage')"
+        >
           <el-button size="small" type="primary">Click to upload</el-button>
         </el-upload>
       </el-form-item>
 
-      <img v-bind:src="form.frontImage"/>
+      <img v-bind:src="form.frontImage" />
 
       <el-form-item label="Back:">
         <el-input
           type="textarea"
           :rows="4"
           placeholder="please input card backend"
-          v-model="form.backText">
+          v-model="form.back"
+        >
         </el-input>
       </el-form-item>
 
@@ -42,19 +44,19 @@
           name="image"
           accept="image/*"
           :show-file-list="false"
-          :on-success="handleImageUploadSuccess('backImage')">
+          :on-success="handleImageUploadSuccess('backImage')"
+        >
           <el-button size="small" type="primary">Click to upload</el-button>
         </el-upload>
       </el-form-item>
 
-      <img v-bind:src="form.backImage"/>
+      <img v-bind:src="form.backImage" />
 
       <div>
         <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
       </div>
     </el-form>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -69,11 +71,11 @@ import router from '@/router';
 })
 export default class Create extends Vue {
   public form: {
-    frontText: string;
+    front: string;
     frontImage: string;
-    backText: string;
+    back: string;
     backImage: string;
-  } = { frontText: '', frontImage: '', backText: '', backImage: '' };
+  } = { front: '', frontImage: '', back: '', backImage: '' };
 
   handleImageUploadSuccess = (field: 'frontImage' | 'backImage'): Function => {
     return (res: { filename: string }) => {
@@ -82,17 +84,18 @@ export default class Create extends Vue {
   };
 
   reset(): void {
-    this.form = { frontText: '', frontImage: '', backText: '', backImage: '' };
+    this.form = { front: '', frontImage: '', back: '', backImage: '' };
   }
+
   async create(event: Event): Promise<void> {
     event.preventDefault();
-    if (!this.form.frontText.trim() || !this.form.backText.trim()) {
+    if (!this.form.front.trim() || !this.form.back.trim()) {
       Message.warning('Please fill card front and back.');
       return;
     }
     try {
       event.preventDefault();
-      await axios.post('/api/cards', this.form);
+      await axios.post('/api/learn-item', this.form);
       Message.success('Add card successful!');
       this.reset();
     } catch (error) {
