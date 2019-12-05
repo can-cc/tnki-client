@@ -14,19 +14,10 @@
         </el-input>
       </el-form-item>
 
-      <el-form-item label="Front image:">
-        <el-upload
-          action="/api/image"
-          name="image"
-          accept="image/*"
-          :show-file-list="false"
-          :on-success="handleImageUploadSuccess('frontImage')"
-        >
-          <el-button size="small" type="primary">Click to upload</el-button>
-        </el-upload>
+      <el-form-item label="Tip:">
+        <el-input type="textarea" :rows="4" placeholder="Please input card tip" v-model="form.tip">
+        </el-input>
       </el-form-item>
-
-      <img v-bind:src="form.frontImage" />
 
       <el-form-item label="Back:">
         <el-input
@@ -37,20 +28,6 @@
         >
         </el-input>
       </el-form-item>
-
-      <el-form-item label="Back image:">
-        <el-upload
-          action="/api/image"
-          name="image"
-          accept="image/*"
-          :show-file-list="false"
-          :on-success="handleImageUploadSuccess('backImage')"
-        >
-          <el-button size="small" type="primary">Click to upload</el-button>
-        </el-upload>
-      </el-form-item>
-
-      <img v-bind:src="form.backImage" />
 
       <div>
         <el-button type="primary" plain v-on:click="create($event)">Add Card</el-button>
@@ -72,19 +49,12 @@ import router from '@/router';
 export default class Create extends Vue {
   public form: {
     front: string;
-    frontImage: string;
+    tip: string;
     back: string;
-    backImage: string;
-  } = { front: '', frontImage: '', back: '', backImage: '' };
-
-  handleImageUploadSuccess = (field: 'frontImage' | 'backImage'): Function => {
-    return (res: { filename: string }) => {
-      this.form[field] = '/image/' + res.filename;
-    };
-  };
+  } = { front: '', tip: '', back: '' };
 
   reset(): void {
-    this.form = { front: '', frontImage: '', back: '', backImage: '' };
+    this.form = { front: '', tip: '', back: '' };
   }
 
   async create(event: Event): Promise<void> {

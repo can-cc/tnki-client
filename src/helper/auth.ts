@@ -14,5 +14,5 @@ export function setUserId(userId: number): void {
 }
 
 export function readUserId(): string {
-  return window.localStorage.getItem('userId')!
+  return window.localStorage.getItem('userId')!;
 }

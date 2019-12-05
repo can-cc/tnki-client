@@ -53,10 +53,8 @@ export default class SignIn extends Vue {
         password: this.password
       })
       .then(response => {
-        // setJwt(response.headers.jwt);
-        // setUserId(response.headers['user-id']);
-        // Message.success('Sign in sccuess');
-        // router.push('/dash');
+        Message.success('登录成功');
+        router.push('/dash');
       })
       .catch(error => {
         if (error.response && error.response.status === 401) {
