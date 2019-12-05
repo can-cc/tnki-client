@@ -1,22 +1,22 @@
 <template>
   <nav>
-	  <div class="container">
-		  <img class="logo" alt="logo" src="../assets/logo.png"/>
+    <div class="container">
+      <img class="logo" alt="logo" src="../assets/logo.png" />
       <div>
-		    <router-link class="top-bar-link" to="/home">
-          <i class="el-icon-search"/>
-          learn
+        <router-link class="top-bar-link" to="/home">
+          <i class="el-icon-search" />
+          学习
         </router-link>
         <router-link class="post-link" to="/create">
-          <i class="el-icon-edit-outline"/>
-          create
+          <i class="el-icon-edit-outline" />
+          创建
         </router-link>
         <router-link class="post-link" to="/cards">
           <i class="el-icon-tickets"></i>
-          cards
+          条目
         </router-link>
       </div>
-	  </div>
+    </div>
   </nav>
 </template>
 
@@ -62,5 +62,4 @@ a
   display: inline-block
   font-size: 18px
   margin-top: 3px
-
 </style>

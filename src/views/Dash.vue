@@ -1,21 +1,23 @@
 <template>
   <div class="dash-page">
-    <el-card :body-style="{padding: '0'}">
+    <el-card :body-style="{ padding: '0' }">
       <div class="total-days-container">
-        <span class="day-number">{{statistics ? statistics.total_days : '-'}}</span>
+        <span class="day-number">{{ statistics ? statistics.total_days : '-' }}</span>
         <span class="day-text">days</span>
         <i class="el-icon-date"></i>
       </div>
       <div class="statistics">
-        <div v-bind:key="item.name"
-             v-for="item in [
-               {name: 'Learned', key: 'learn_time'},
-               {name: 'Need learn', key: 'need_learn_count'},
-               {name: 'All Finish', key: 'all_finish'}
-             ]"
-             class="statistics-grid">
-          <div class="value">{{statistics ? statistics[item.key] : '-'}}</div>
-          <div class="name">{{item.name}}</div>
+        <div
+          v-bind:key="item.name"
+          v-for="item in [
+            { name: 'Learned', key: 'learn_time' },
+            { name: 'Need learn', key: 'need_learn_count' },
+            { name: 'All Finish', key: 'all_finish' }
+          ]"
+          class="statistics-grid"
+        >
+          <div class="value">{{ statistics ? statistics[item.key] : '-' }}</div>
+          <div class="name">{{ item.name }}</div>
         </div>
       </div>
     </el-card>
@@ -32,11 +34,6 @@
         add new card
       </router-link>
     </div>
-
-    <div class="ds-container" v-if="dailySentence">
-      <div class="content">{{dailySentence.content}}</div>
-      <div class="note">{{dailySentence.note}}</div>
-    </div>
   </div>
 </template>
 
@@ -45,9 +42,10 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import axios from 'axios';
 import jsonp from 'jsonp';
 
-interface DailySentence {
-  content: string;
-  note: string;
+interface DailyStatistics {
+  learnedNumber: number;
+  needLearndNumber: number;
+  finishedNumber: number;
 }
 
 @Component({
@@ -55,14 +53,10 @@ interface DailySentence {
 })
 export default class Dash extends Vue {
   public statistics = null;
-  public dailySentence: DailySentence | null = null;
 
   created() {
-    axios.get(`/api/daily/statistics?timestamp=${new Date().getTime()}`).then(response => {
+    axios.get(`/api/daily/statistics`).then(response => {
       this.statistics = response.data;
-    });
-    jsonp(`//open.iciba.com/dsapi/`, (error: Error | null, dailySentence: DailySentence) => {
-      this.dailySentence = dailySentence;
     });
   }
 }
@@ -147,11 +141,4 @@ export default class Dash extends Vue {
 .post-link-container .el-icon-d-arrow-right
   font-size: 10px
   margin-left: -4px
-
-.ds-container
-  margin-top: 30px
-  font-size: 12px
-  font-weight: 500
-  color: #67C23A
-  width: 100%
 </style>
