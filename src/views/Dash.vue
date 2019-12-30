@@ -1,30 +1,25 @@
 <template>
   <div class="dash-page">
     <el-card :body-style="{ padding: '0' }">
-      <div class="total-days-container">
-        <span class="day-number">{{ statistics ? statistics.total_days : '-' }}</span>
-        <span class="day-text">days</span>
-        <i class="el-icon-date"></i>
-      </div>
       <div class="statistics">
-        <div
-          v-bind:key="item.name"
-          v-for="item in [
-            { name: 'Learned', key: 'learn_time' },
-            { name: 'Need learn', key: 'need_learn_count' },
-            { name: 'All Finish', key: 'all_finish' }
-          ]"
-          class="statistics-grid"
-        >
-          <div class="value">{{ statistics ? statistics[item.key] : '-' }}</div>
-          <div class="name">{{ item.name }}</div>
+        <div class="statistics-grid">
+          <div class="value">{{ numberize(statistics.learnedNumber) }}</div>
+          <div class="name">已记忆</div>
+        </div>
+        <div class="statistics-grid">
+          <div class="value">{{ numberize(statistics.needLearnNumber) }}</div>
+          <div class="name">还需记忆</div>
+        </div>
+        <div class="statistics-grid">
+          <div class="value">{{ numberize(statistics.allNumber) }}</div>
+          <div class="name">总计</div>
         </div>
       </div>
     </el-card>
 
     <div>
       <router-link class="go-learn-button" to="learn">
-        <div>Learn</div>
+        <div>进入学习</div>
       </router-link>
     </div>
 
@@ -40,23 +35,35 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import axios from 'axios';
-import jsonp from 'jsonp';
 
 interface DailyStatistics {
-  learnedNumber: number;
-  needLearndNumber: number;
-  finishedNumber: number;
+  learnedNumber?: number;
+  needLearnNumber?: number;
+  allNumber?: number;
 }
 
 @Component({
   components: {}
 })
 export default class Dash extends Vue {
-  public statistics = null;
+  public statistics: DailyStatistics = {};
+
+  numberize(n: number | undefined) {
+    if (n !== 0 && !n) {
+      return '-';
+    }
+    return n;
+  }
 
   created() {
-    axios.get(`/api/daily/statistics`).then(response => {
-      this.statistics = response.data;
+    axios.post(`/api/daily-check-in`).then(() => {
+      axios.get(`/api/daily-statistics`).then(response => {
+        this.statistics = {
+          learnedNumber: response.data.learnedNumber,
+          needLearnNumber: response.data.needLearnNumber,
+          allNumber: response.data.learnedNumber! + response.data.needLearnNumber!
+        };
+      });
     });
   }
 }
@@ -89,26 +96,6 @@ export default class Dash extends Vue {
 .statistics {
     display: flex;
     padding: 10px 0 10px;
-}
-
-.total-days-container {
-    margin: 30px auto 10px;
-}
-
-.total-days-container .day-number {
-    font-weight: 900;
-    font-size: 4rem;
-    color: #67C23A;
-    margin-left: 58px;
-}
-
-.total-days-container .day-text {
-    color: #409EFF;
-    font-weight: 900;
-}
-
-.total-days-container .el-icon-date {
-    color: #409EFF;
 }
 
 .go-learn-button {
