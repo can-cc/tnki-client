@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Nav/>
+    <Nav />
     <div class="view-container">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
@@ -52,5 +52,4 @@ a
 .view-container
   max-width: 1000px
   margin: 0 auto
-
 </style>

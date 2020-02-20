@@ -57,12 +57,8 @@ export default class Dash extends Vue {
 
   created() {
     axios.post(`/api/daily-check-in`).then(() => {
-      axios.get(`/api/daily-statistics`).then(response => {
-        this.statistics = {
-          learnedNumber: response.data.learnedNumber,
-          needLearnNumber: response.data.needLearnNumber,
-          allNumber: response.data.learnedNumber! + response.data.needLearnNumber!
-        };
+      axios.get(`/api/daily-learn-statistics`).then(response => {
+        // console.log(response);
       });
     });
   }
@@ -81,6 +77,7 @@ export default class Dash extends Vue {
     width: 100%;
     color: #878D99;
 }
+
 .statistics-grid .value {
     font-weight: 900;
     font-size: 1.5rem;

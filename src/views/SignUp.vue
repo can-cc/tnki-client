@@ -18,7 +18,8 @@
             name="tnki-password"
             type="password"
             placeholder="Password"
-            :minlength="6">
+            :minlength="6"
+          >
           </el-input>
         </label>
       </div>
@@ -31,7 +32,8 @@
             name="tnki-password-verification"
             type="password"
             placeholder="Repeat Password"
-            :minlength="6">
+            :minlength="6"
+          >
           </el-input>
         </label>
       </div>
@@ -43,7 +45,6 @@
       <div class="tip">
         Already have an account? <router-link to="/signin">Sign In</router-link>
       </div>
-
     </form>
   </div>
 </template>
@@ -85,45 +86,45 @@ export default class SignUp extends Vue {
 </script>
 
 <style scoped lang="stylus">
-  h1, h2 {
-    color: #409EFF;
-    font-family: "Verdana";
-  }
+h1, h2 {
+  color: #409EFF;
+  font-family: "Verdana";
+}
 
-  h2 {
-    margin-top: -1.5rem;
-  }
+h2 {
+  margin-top: -1.5rem;
+}
 
-  form {
-    padding: 0 10px;
-  }
+form {
+  padding: 0 10px;
+}
 
-  .form-item {
-    margin-bottom: 10px;
-  }
+.form-item {
+  margin-bottom: 10px;
+}
 
-  .form-item label {
-    display: flex;
-    align-items: center;
-  }
+.form-item label {
+  display: flex;
+  align-items: center;
+}
 
-  .form-item span {
-    display: inline-block;
-    width: 110px;
-    text-align: left;
-    color: #409EFF;
-    font-weight: bolder;
-  }
+.form-item span {
+  display: inline-block;
+  width: 110px;
+  text-align: left;
+  color: #409EFF;
+  font-weight: bolder;
+}
 
-  .button-container {
-    margin-top: 10px;
-  }
+.button-container {
+  margin-top: 10px;
+}
 
-  .tip {
-    margin-top: 10px;
-  }
+.tip {
+  margin-top: 10px;
+}
 
-  .tip a {
-    color: #409EFE
-  }
+.tip a {
+  color: #409EFE
+}
 </style>

@@ -57,7 +57,7 @@ export default class SignIn extends Vue {
         router.push('/dash');
       })
       .catch(error => {
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 400) {
           return Message.error('Email or Password not match');
         } else {
           Message.error('Sign In Error');
