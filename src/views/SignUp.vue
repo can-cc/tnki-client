@@ -5,8 +5,13 @@
     <form v-on:submit="signUp($event)">
       <div class="form-item">
         <label>
-          <span>Email</span>
-          <el-input v-model="email" name="tnki-email" type="email" placeholder="Email"></el-input>
+          <span>Username</span>
+          <el-input
+            v-model="username"
+            name="tnki-username"
+            type="text"
+            placeholder="Username"
+          ></el-input>
         </label>
       </div>
 
@@ -59,7 +64,7 @@ import router from '@/router';
   components: {}
 })
 export default class SignUp extends Vue {
-  public email: string = '';
+  public username: string = '';
   public password: string = '';
   public passwordVerification: string = '';
 
@@ -70,7 +75,7 @@ export default class SignUp extends Vue {
         return this.$message.error('Password not match!');
       }
       await axios.post('/api/signup', {
-        email: this.email,
+        username: this.username,
         password: this.password
       });
       Message({
