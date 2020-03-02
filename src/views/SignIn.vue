@@ -60,7 +60,7 @@ export default class SignIn extends Vue {
         if (error.response && error.response.status === 401) {
           return Message.error('用户名或密码错误');
         } else {
-          Message.error('Sign In Error');
+          Message.error('登陆错误');
         }
       });
   }
