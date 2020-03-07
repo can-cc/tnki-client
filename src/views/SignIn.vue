@@ -5,7 +5,7 @@
     <form v-on:submit="signIn($event)">
       <div class="form-item">
         <label>
-          <span>Username</span>
+          <span>用户名</span>
           <el-input v-model="username" name="tnki-email" type="text" placeholder="Email"></el-input>
         </label>
       </div>

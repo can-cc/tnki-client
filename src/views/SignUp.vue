@@ -1,11 +1,11 @@
 <template>
   <div class="signup-page">
     <h1>Tnki</h1>
-    <h2>Sign Up</h2>
+    <h2>注册</h2>
     <form v-on:submit="signUp($event)">
       <div class="form-item">
         <label>
-          <span>Username</span>
+          <span>用户名</span>
           <el-input
             v-model="username"
             name="tnki-username"
@@ -17,7 +17,7 @@
 
       <div class="form-item">
         <label>
-          <span>Password</span>
+          <span>密码</span>
           <el-input
             v-model="password"
             name="tnki-password"
@@ -31,7 +31,7 @@
 
       <div class="form-item">
         <label>
-          <span>Repeat Password</span>
+          <span>密码确认</span>
           <el-input
             v-model="passwordVerification"
             name="tnki-password-verification"
@@ -57,7 +57,7 @@
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
 import { Message } from 'element-ui';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from '@/router';
 
 @Component({
@@ -84,7 +84,11 @@ export default class SignUp extends Vue {
       });
       router.push('/signin');
     } catch (error) {
-      Message.error('Sign up unknown error.');
+      if (error.response.status === 409) {
+        Message.error('用户名已存在');
+      } else {
+        Message.error('注册失败');
+      }
     }
   }
 }

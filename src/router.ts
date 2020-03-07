@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import About from './views/About.vue';
+import Main from './views/Main.vue';
 
 const SignIn = async () => await require('./views/SignIn.vue');
 const SignUp = async () => await require('./views/SignUp.vue');
@@ -27,38 +28,44 @@ export default new Router({
       component: SignUp
     },
     {
-      path: '/create',
-      name: 'create',
-      component: Create
-    },
-    {
-      path: '/cards',
-      name: 'cards',
-      component: CardList
-    },
-    {
-      path: '/learn',
-      name: 'learn',
-      component: Learn
-    },
-    {
-      path: '/learn-complete',
-      name: 'learn-complete',
-      component: LearnComplete
-    },
-    {
-      path: '/dash',
-      name: 'dash',
-      component: Dash
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    },
-    {
-      path: '*',
-      redirect: { name: 'dash' }
+      path: '',
+      component: Main,
+      children: [
+        {
+          path: '/create',
+          name: 'create',
+          component: Create
+        },
+        {
+          path: '/cards',
+          name: 'cards',
+          component: CardList
+        },
+        {
+          path: '/learn',
+          name: 'learn',
+          component: Learn
+        },
+        {
+          path: '/learn-complete',
+          name: 'learn-complete',
+          component: LearnComplete
+        },
+        {
+          path: '/dash',
+          name: 'dash',
+          component: Dash
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: About
+        },
+        {
+          path: '*',
+          redirect: { name: 'dash' }
+        }
+      ]
     }
   ]
 });
