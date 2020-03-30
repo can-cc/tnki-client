@@ -2,7 +2,7 @@
   <nav>
     <div class="container">
       <img class="logo" alt="logo" src="../assets/logo.png" />
-      <div>
+      <div class="main-link-container">
         <router-link class="top-bar-link" to="/home">
           <i class="el-icon-search" />
           学习
@@ -14,6 +14,12 @@
         <router-link class="post-link" to="/cards">
           <i class="el-icon-tickets"></i>
           条目
+        </router-link>
+      </div>
+      <div class="profile-link-container">
+        <router-link class="post-link" to="/profile">
+          <i class="el-icon-tickets"></i>
+          我的
         </router-link>
       </div>
     </div>
@@ -43,10 +49,11 @@ nav
   align-items: center
   position: relative
 
-.container > div
+.container .main-link-container
   position: relative
-  text-align: center
+  text-align: left
   overflow: hidden
+  flex-grow: 10
 
 .logo
   width: 22px

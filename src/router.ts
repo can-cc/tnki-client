@@ -11,6 +11,8 @@ const Create = async () => await require('./views/Create.vue');
 const CardList = async () => await require('./views/CardList.vue');
 const Learn = async () => await require('./views/Learn.vue');
 const LearnComplete = async () => await require('./views/LearnComplete');
+const ProfilePage = async () => await require('./views/Profile/ProfilePage');
+const LearningItemPage = async () => await require('./views/Profile/LearningItemPage');
 
 Vue.use(Router);
 
@@ -55,6 +57,23 @@ export default new Router({
           path: '/dash',
           name: 'dash',
           component: Dash
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: ProfilePage,
+          children: [
+            {
+              path: 'learning-item',
+              name: 'learning-item',
+              component: LearningItemPage
+            },
+            {
+              path: '',
+              redirect: { name: 'learning-item' }
+            },
+           
+          ]
         },
         {
           path: '/about',
