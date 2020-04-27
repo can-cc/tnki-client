@@ -39,7 +39,6 @@
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
 import { Upload, Message, Form, FormItem } from 'element-ui';
-import { setJwt } from '@/helper/auth';
 import axios, { AxiosResponse } from 'axios';
 import router from '@/router';
 

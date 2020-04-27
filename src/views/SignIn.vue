@@ -34,8 +34,8 @@
 <script lang="ts">
 import { Component, Vue, Model } from 'vue-property-decorator';
 import { Message } from 'element-ui';
-import { setJwt, setUserId } from '@/helper/auth';
-import axios from 'axios';
+import { setJwtToken } from '@/helper/auth';
+import axios, { AxiosResponse } from 'axios';
 import router from '@/router';
 
 @Component({
@@ -52,12 +52,14 @@ export default class SignIn extends Vue {
         username: this.username,
         password: this.password
       })
-      .then(response => {
+      .then((response: AxiosResponse) => {
         Message.success('登录成功');
+        setJwtToken(response.headers['x-app-auth-token']);
+
         router.push('/dash');
       })
       .catch(error => {
-        if (error.response && error.response.status === 403) {
+        if (error.response && error.response.status === 401) {
           return Message.error('用户名或密码错误');
         } else {
           Message.error('登陆错误');

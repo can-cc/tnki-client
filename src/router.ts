@@ -18,8 +18,8 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/signin',
-      name: 'signin',
+      path: '/login',
+      name: 'login',
       component: SignIn
     },
     {

@@ -35,7 +35,6 @@ import { Component, Vue, Model } from 'vue-property-decorator';
 import { Message } from 'element-ui';
 import axios from 'axios';
 import router from '@/router';
-import { readUserId } from '@/helper/auth';
 import { LearningItem } from '@/interface/learning-item';
 
 @Component({

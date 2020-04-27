@@ -3,14 +3,14 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3500/',
+        target: 'http://localhost:8360/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/'
         }
       },
       '/image': {
-        target: 'http://localhost:3500',
+        target: 'http://localhost:8360',
         changeOrigin: true
       }
     }

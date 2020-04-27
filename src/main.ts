@@ -6,7 +6,7 @@ import { Button, Card, Input, Breadcrumb, BreadcrumbItem } from 'element-ui';
 
 Vue.config.productionTip = true;
 
-import { setupAxiosAuth } from '@/helper/axios';
+import { setupAxiosInterceptor } from '@/helper/http-interceptor';
 
 Vue.use(Button);
 Vue.use(Card);
@@ -14,7 +14,7 @@ Vue.use(Input);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 
-setupAxiosAuth();
+setupAxiosInterceptor();
 
 new Vue({
   router,
