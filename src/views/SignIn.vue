@@ -48,7 +48,7 @@ export default class SignIn extends Vue {
   public signIn(event: Event) {
     event.preventDefault();
     axios
-      .post('/api/signin', {
+      .post('/api/login', {
         username: this.username,
         password: this.password
       })
@@ -57,7 +57,7 @@ export default class SignIn extends Vue {
         router.push('/dash');
       })
       .catch(error => {
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 403) {
           return Message.error('用户名或密码错误');
         } else {
           Message.error('登陆错误');
