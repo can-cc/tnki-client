@@ -55,7 +55,6 @@ export default class SignIn extends Vue {
       .then((response: AxiosResponse) => {
         Message.success('登录成功');
         setJwtToken(response.headers['x-app-auth-token']);
-
         router.push('/dash');
       })
       .catch(error => {
